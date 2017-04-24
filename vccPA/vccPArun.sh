@@ -54,7 +54,9 @@ for target in ${targets}; do
 	bw=1000
 	clients=19
     #has noly 1 vecn flow
-	./vtcp_fair.sh "virtual-ECN" ${bw} $clients 1 "vecn"$(tail -1 RED1tab)
+	./vtcp_fair.sh "virtual-ECN" ${bw} 1 1 "vecn"$(tail -1 RED1tab)
+    ./vtcp_fair.sh "virtual-ECN" ${bw} 9 1 "vecn"$(tail -1 RED1tab)
+	./vtcp_fair.sh "virtual-ECN" ${bw} 19 1 "vecn"$(tail -1 RED1tab)
 	cp vtcpfair/vecnRED1-${bw}mbps-c1/goodput.png ${figdir}/fig3.png
 	;;
     4)
@@ -67,19 +69,9 @@ for target in ${targets}; do
     bw_host_high=1000
     clients=9
     vtcp=1
-    ./vtcp_fair_ue.sh "virtual-ECN" ${bw} ${bw_host_low} ${bw_host_high} $clients $vtcp ${label} $(tail -1 RED1tab)
-    ;;
-    5)
-	echo "********************************************************************************"
-	echo "* 生成图片5 10 hosts "
-	echo "********************************************************************************"
-    label="fig4vecn"
-    bw=1000
-    bw_host_low=500
-    bw_host_high=1000
-    clients=5
-    vtcp=1
-    ./vtcp_fair_ue.sh "virtual-ECN" ${bw} ${bw_host_low} ${bw_host_high} $clients $vtcp ${label} $(tail -1 ./RED1tab)
+    ./vtcp_fair_ue.sh "virtual-ECN" ${bw} ${bw_host_low} ${bw_host_high} 1 $vtcp ${label} $(tail -1 RED1tab)
+    ./vtcp_fair_ue.sh "virtual-ECN" ${bw} ${bw_host_low} ${bw_host_high} 5 $vtcp ${label} $(tail -1 RED1tab)
+    ./vtcp_fair_ue.sh "virtual-ECN" ${bw} ${bw_host_low} ${bw_host_high} 9 $vtcp ${label} $(tail -1 RED1tab)
     ;;
     *)
 		echo "${script}: no such option" 1>&2

@@ -39,9 +39,8 @@ iperf_port=5001
 
 iperf=`which iperf`
 qsize=1000
-for cutoff in `seq 1 1 9`; do
-#for debug use
-    #cutoff=10	
+range="1 5 9"
+for cutoff in $range; do
     dir="tcpfair/${label}-c${cutoff}"
     rm -rf $dir
     mkdir -p $dir
